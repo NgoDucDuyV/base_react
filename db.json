@@ -1,0 +1,246 @@
+{
+  "product": [
+    {
+      "name": "Skinny Fit Jeans update",
+      "description": "Slim fit jeans with stretch fabric.",
+      "slug": "skinny-fit-jeans",
+      "image_url": "/product/men/product_1.png",
+      "current_price": 240,
+      "original_price": 260,
+      "discount_percentage": 8,
+      "stock": 50,
+      "category_id": 3,
+      "gallery": [
+        "/product/men/product_1.png",
+        "/product/men/product_1.1.png",
+        "/product/men/product_1.2.png"
+      ],
+      "rating": 3.5,
+      "currency": "$",
+      "is_featured": true,
+      "id": 1
+    },
+    {
+      "name": "Checkered Shirt update",
+      "description": "Classic checkered cotton shirt.",
+      "slug": "checkered-shirt",
+      "image_url": "/product/men/product_2.png",
+      "current_price": 180,
+      "original_price": 180,
+      "discount_percentage": 0,
+      "stock": 40,
+      "category_id": 3,
+      "gallery": [
+        "/product/men/product_2.png"
+      ],
+      "rating": 4.5,
+      "currency": "$",
+      "is_featured": false,
+      "id": 2
+    },
+    {
+      "id": 3,
+      "name": "Sleeve Striped T-shirt",
+      "slug": "sleeve-striped-tshirt-1",
+      "image_url": "/product/men/product_3.png",
+      "gallery": [
+        "/product/men/product_3.png"
+      ],
+      "current_price": 130,
+      "original_price": 160,
+      "discount_percentage": 19,
+      "rating": 4.5,
+      "stock": 60,
+      "currency": "$",
+      "description": "Casual striped t-shirt.",
+      "category_id": 1,
+      "is_featured": false
+    },
+    {
+      "id": 4,
+      "name": "Sleeve Striped T-shirt",
+      "slug": "sleeve-striped-tshirt-2",
+      "image_url": "/product/men/product_4.png",
+      "gallery": [
+        "/product/men/product_4.png"
+      ],
+      "current_price": 120,
+      "original_price": 167,
+      "discount_percentage": 28,
+      "rating": 4.5,
+      "stock": 70,
+      "currency": "$",
+      "description": "Comfortable striped tee.",
+      "category_id": 1,
+      "is_featured": false
+    },
+    {
+      "id": 5,
+      "name": "Sleeve Striped T-shirt",
+      "slug": "sleeve-striped-tshirt-3",
+      "image_url": "/product/men/product_1.1.png",
+      "gallery": [
+        "/product/men/product_1.1.png"
+      ],
+      "current_price": 120,
+      "original_price": 167,
+      "discount_percentage": 28,
+      "rating": 4.5,
+      "stock": 50,
+      "currency": "$",
+      "description": "Striped t-shirt variation.",
+      "category_id": 2,
+      "is_featured": false
+    },
+    {
+      "id": 6,
+      "name": "Sleeve Striped T-shirt",
+      "slug": "sleeve-striped-tshirt-4",
+      "image_url": "/product/men/product_1.2.png",
+      "gallery": [
+        "/product/men/product_1.2.png"
+      ],
+      "current_price": 120,
+      "original_price": 167,
+      "discount_percentage": 28,
+      "rating": 4.5,
+      "stock": 45,
+      "currency": "$",
+      "description": "Striped t-shirt variation.",
+      "category_id": 2,
+      "is_featured": false
+    },
+    {
+      "name": "Sleeve Striped T-shirt update",
+      "description": "Striped t-shirt variation.",
+      "slug": "sleeve-striped-tshirt-5",
+      "image_url": "/product/men/product_1.3.png",
+      "current_price": 120,
+      "original_price": 167,
+      "discount_percentage": 28,
+      "stock": 35,
+      "category_id": 3,
+      "gallery": [
+        "/product/men/product_1.3.png"
+      ],
+      "rating": 4.5,
+      "currency": "$",
+      "is_featured": false,
+      "id": 7
+    },
+    {
+      "id": 8,
+      "name": "Sleeve Striped T-shirt",
+      "slug": "sleeve-striped-tshirt-6",
+      "image_url": "/product/men/product_1.4.png",
+      "gallery": [
+        "/product/men/product_1.4.png"
+      ],
+      "current_price": 120,
+      "original_price": 167,
+      "discount_percentage": 28,
+      "rating": 4.5,
+      "stock": 25,
+      "currency": "$",
+      "description": "Striped t-shirt variation.",
+      "category_id": 3,
+      "is_featured": false
+    },
+    {
+      "name": "Skinny Fit Jeans update",
+      "description": "Slim fit jeans with stretch fabric.",
+      "slug": "skinny-fit-jeans",
+      "image_url": "/product/men/product_1.png",
+      "current_price": 12313,
+      "original_price": 123,
+      "discount_percentage": 123,
+      "stock": 123,
+      "category_id": 1,
+      "gallery": [
+        "/product/men/product_1.png"
+      ],
+      "rating": 0,
+      "currency": "$",
+      "is_featured": false,
+      "id": 9
+    },
+    {
+      "name": "Skinny Fit Jeans ",
+      "description": "Slim fit jeans with stretch fabric.",
+      "slug": "skinny-fit-jeans",
+      "image_url": "/product/men/product_4.png",
+      "current_price": 765675,
+      "original_price": 7675876,
+      "discount_percentage": 876876,
+      "stock": 8767,
+      "category_id": 1,
+      "gallery": [
+        "/product/men/product_4.png"
+      ],
+      "rating": 0,
+      "currency": "$",
+      "is_featured": false,
+      "id": 11
+    },
+    {
+      "name": "Skinny Fit Jeans ",
+      "description": "Slim fit jeans with stretch fabric.",
+      "slug": "skinny-fit-jeans",
+      "image_url": "/product/men/product_1.png",
+      "current_price": 3,
+      "original_price": 4,
+      "discount_percentage": 34,
+      "stock": 4,
+      "category_id": 2,
+      "gallery": [
+        "/product/men/product_1.png"
+      ],
+      "rating": 0,
+      "currency": "$",
+      "is_featured": false,
+      "id": 15
+    }
+  ],
+  "categories": [
+    {
+      "name": "Men",
+      "description": "Men fashion",
+      "slug": "men",
+      "image_url": "/category/men.png",
+      "is_active": false,
+      "id": 1
+    },
+    {
+      "name": "Women ",
+      "description": "Women fashion",
+      "slug": "women",
+      "image_url": "/category/women.png",
+      "is_active": true,
+      "id": 2
+    },
+    {
+      "id": 3,
+      "name": "Accessories",
+      "slug": "accessories",
+      "image_url": "/category/accessories.png",
+      "description": "Accessories items",
+      "is_active": true
+    },
+    {
+      "name": "Skinny Fit Jeans  u[p[date",
+      "description": "Slim fit jeans with stretch fabric.",
+      "slug": "skinny-fit-jeans",
+      "image_url": "/product/men/product_1.png",
+      "is_active": true,
+      "id": 4
+    },
+    {
+      "name": "Skinny Fit Jeans ",
+      "description": "Slim fit jeans with stretch fabric.",
+      "slug": "skinny-fit-jeans",
+      "image_url": "/product/men/product_1.png",
+      "is_active": true,
+      "id": 5
+    }
+  ]
+}

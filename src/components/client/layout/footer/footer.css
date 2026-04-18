@@ -1,0 +1,35 @@
+/* typography */
+.shop-logo {
+    font-weight: 900;
+    font-size: 2rem;
+    letter-spacing: -0.05em;
+}
+
+.footer-heading {
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-link {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.9375rem;
+    transition: color 0.2s;
+}
+
+.footer-link:hover {
+    color: #000;
+}
+
+/* layout */
+.newsletter-wrapper {
+    margin-bottom: -100px;
+    position: relative;
+    z-index: 10;
+}
+
+.footer-main-content {
+    padding-top: 140px;
+}
