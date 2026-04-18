@@ -1,27 +1,18 @@
 import React from 'react';
 import { Flex, Space, Table, Tag } from 'antd';
 import type { TableProps } from 'antd';
-import { useProductDelete, useProducts } from '@/hook/product.hook';
 import type { TProduct } from '@/types/product.type';
-import { useCaregorys } from '@/hook/caregory.hook';
 import type { PopconfirmProps } from 'antd';
 import { Button, message, Popconfirm } from 'antd';
 import { Link } from 'react-router-dom';
 
 function ProductPage() {
 
-    const { data: products, isLoading } = useProducts()
-
-    const { data: caregorys, isLoading: isLoadingCaregorys } = useCaregorys()
-
-    const deleteProduct = useProductDelete()
-
     const [messageApi, holder] = message.useMessage();
 
     const confirm = (id: string | number) => {
         console.log(id);
         messageApi.success('Click on Yes');
-        deleteProduct.mutateAsync(id)
     };
 
     const cancel: PopconfirmProps['onCancel'] = (e) => {
@@ -29,10 +20,8 @@ function ProductPage() {
         messageApi.error('Click on No');
     };
 
-    // if (!isLoadingCaregorys) {
-    //     console.log(caregorys);
-    // }
-    const columns: TableProps<TProduct>['columns'] = [
+
+    const columns: TableProps<any>['columns'] = [
         {
             title: 'ID',
             dataIndex: "id",
@@ -72,53 +61,33 @@ function ProductPage() {
             key: 'discount_percentage',
         },
         // {
-        //     title: 'Rating',
-        //     dataIndex: 'rating',
-        //     key: 'rating',
+        //     title: 'Category',
+        //     key: 'category_id',
+        //     dataIndex: 'category_id',
+        //     render: (_, { category_id }) => (
+        //         <Flex gap="small" align="center" wrap>
+        //             {caregorys?.map((caregory) => {
+        //                 let color = 'blue';
+        //                 if (caregory.name === 'Men') {
+        //                     color = 'volcano';
+        //                 }
+        //                 if (caregory.name === 'Women') {
+        //                     color = 'purple';
+        //                 }
+        //                 if (caregory.name === 'Accessories') {
+        //                     color = 'green';
+        //                 }
+        //                 if (caregory.id == category_id) {
+        //                     return (
+        //                         <Tag color={color} key={caregory.id}>
+        //                             {caregory.name.toUpperCase()}
+        //                         </Tag>
+        //                     );
+        //                 }
+        //             })}
+        //         </Flex>
+        //     ),
         // },
-        // {
-        //     title: 'Stock',
-        //     dataIndex: 'stock',
-        //     key: 'stock',
-        // },
-        // {
-        //     title: 'Currency',
-        //     dataIndex: 'currency',
-        //     key: 'currency',
-        // },
-        // {
-        //     title: 'Description',
-        //     dataIndex: 'description',
-        //     key: 'description',
-        // },
-        {
-            title: 'Category',
-            key: 'category_id',
-            dataIndex: 'category_id',
-            render: (_, { category_id }) => (
-                <Flex gap="small" align="center" wrap>
-                    {caregorys?.map((caregory) => {
-                        let color = 'blue';
-                        if (caregory.name === 'Men') {
-                            color = 'volcano';
-                        }
-                        if (caregory.name === 'Women') {
-                            color = 'purple';
-                        }
-                        if (caregory.name === 'Accessories') {
-                            color = 'green';
-                        }
-                        if (caregory.id == category_id) {
-                            return (
-                                <Tag color={color} key={caregory.id}>
-                                    {caregory.name.toUpperCase()}
-                                </Tag>
-                            );
-                        }
-                    })}
-                </Flex>
-            ),
-        },
         {
             title: 'Action',
             key: 'action',
@@ -144,9 +113,8 @@ function ProductPage() {
             ),
         },
     ];
-    // if (isLoading) {
-    //     console.log(products);
-    // }
+    const isLoading = true
+    const products = {} as TProduct[]
     return (
         <>
             {holder}
@@ -155,7 +123,7 @@ function ProductPage() {
                     <Button type="primary">Add Product</Button>
                 </Link>
             </div>
-            {isLoading || isLoadingCaregorys ? <div>Loading...</div> : <Table<TProduct> columns={columns} dataSource={products} />}
+            {isLoading ? <div>Loading...</div> : <Table<TProduct> columns={columns} dataSource={products} />}
         </>
     )
 }

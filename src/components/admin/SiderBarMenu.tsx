@@ -23,19 +23,19 @@ const items: MenuItem[] = [
         getItem('List Product', 'products'),
         getItem('Add Product', 'products/add'),
     ]),
-    getItem('Caregory', 'sub2', <ProductOutlined />, [
-        getItem('List Caregory', 'caregories'),
-        getItem('Add Caregory', 'caregories/add'),
-    ]),
-    // getItem('Option 1', '3', <PieChartOutlined />),
-    // getItem('Option 2', '4', <DesktopOutlined />),
-    // getItem('User', 'sub1', <UserOutlined />, [
-    //     getItem('Tom', '5'),
-    //     getItem('Bill', '6'),
-    //     getItem('Alex', '7'),
+    // getItem('Caregory', 'sub2', <ProductOutlined />, [
+    //     getItem('List Caregory', 'caregories'),
+    //     getItem('Add Caregory', 'caregories/add'),
     // ]),
-    // getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '8'), getItem('Team 2', '9')]),
-    // getItem('Files', '10', <FileOutlined />),
+    // // getItem('Option 1', '3', <PieChartOutlined />),
+    // // getItem('Option 2', '4', <DesktopOutlined />),
+    // // getItem('User', 'sub1', <UserOutlined />, [
+    // //     getItem('Tom', '5'),
+    // //     getItem('Bill', '6'),
+    // //     getItem('Alex', '7'),
+    // // ]),
+    // // getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '8'), getItem('Team 2', '9')]),
+    // // getItem('Files', '10', <FileOutlined />),
 ];
 
 

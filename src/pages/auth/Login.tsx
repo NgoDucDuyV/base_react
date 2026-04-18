@@ -17,26 +17,10 @@ function Login() {
     const [form] = Form.useForm<TLogin>();
 
     const onFinish = (values: TLogin) => {
-        Login.mutateAsync(values)
+        console.log(values);
     };
 
-
-    const Login = useMutation({
-        mutationFn: async (data: TLogin) => {
-            const res = axios.post(`http://localhost:3000/login`, data)
-            return res
-        },
-        
-        onSuccess: (res: AxiosResponse) => {
-            sessionStorage.setItem("accessToken", res.data.accessToken)
-            message.success("Đăng nhập thành công !")
-            navigate("/admin")
-        },
-
-        onError: (err: AxiosError) => {
-            message.error(`${err.response?.data}`)
-        }
-    })
+    const Login = useMutation({})
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">

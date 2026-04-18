@@ -2,10 +2,7 @@ import React from 'react'
 import Container from '@/components/Container'
 import ProductCard from '@/components/client/product/ProductCard'
 import { motion } from 'framer-motion'
-import { useQuery } from '@tanstack/react-query'
-import { productService } from '@/services/product.service'
 import { Link } from 'react-router-dom'
-import { Card, CardContent } from "@/components/ui/card"
 import {
     Carousel,
     CarouselContent,
@@ -13,106 +10,90 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel"
-import { useProducts } from '@/hook/product.hook'
+import { ArrowRight } from 'lucide-react'
 
 type ViewsProductProps = {
     title?: string
+    subtitle?: string
 }
 
-function ViewsProduct({ title }: ViewsProductProps) {
+function ViewsProduct({ title, subtitle }: ViewsProductProps) {
     const containerVariants = {
-        hidden: {},
+        hidden: { opacity: 0 },
         show: {
+            opacity: 1,
             transition: {
-                staggerChildren: 0.15,
+                staggerChildren: 0.1,
             },
         },
     }
 
-    const itemVariants = {
-        hidden: { opacity: 0, y: 40 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-    }
-
-    const { data: products, isLoading } = useProducts()
-
     return (
-        <Container className="py-10 mx-auto py-16 sm:px-6 lg:px-8">
-            {/* Header */}
-            <motion.header
-                className="mb-12"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
-            >
-                <h2
-                    className="text-4xl md:text-5xl text-center heading-bold uppercase"
-                    data-purpose="section-title"
+        <section className="py-24 bg-zinc-50 dark:bg-zinc-950 overflow-hidden">
+            <Container>
+                {/* Header */}
+                <motion.header
+                    className="relative mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 >
-                    {title ? title : "NEW ARRIVALS"}
-                </h2>
-            </motion.header>
+                    <div className="max-w-2xl">
+                        <motion.span 
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            className="inline-block px-4 py-1.5 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold uppercase tracking-widest mb-4"
+                        >
+                            Collection 2024
+                        </motion.span>
+                        <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-zinc-900 dark:text-white leading-[0.9]">
+                            {title ? title : "NEW ARRIVALS"}
+                        </h2>
+                        <p className="mt-6 text-lg text-zinc-500 max-w-lg leading-relaxed">
+                            {subtitle || "Explore our latest collection of premium essentials designed for modern life. Quality materials meets timeless design."}
+                        </p>
+                    </div>
 
-            {/* Products Grid */}
-            <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.3 }}
-                className='px-2'
-            >
-                {!isLoading ? (
+                    <Link to="/casual" className="group flex items-center gap-3 text-zinc-900 dark:text-white font-bold text-lg hover:text-indigo-600 transition-colors">
+                        Explore All 
+                        <span className="w-12 h-12 rounded-full border border-zinc-200 dark:border-zinc-800 flex items-center justify-center group-hover:bg-indigo-600 group-hover:border-indigo-600 group-hover:text-white transition-all duration-300">
+                            <ArrowRight size={20} />
+                        </span>
+                    </Link>
+                </motion.header>
+
+                {/* Products Carousel */}
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.2 }}
+                    className="relative"
+                >
                     <Carousel
                         opts={{
                             align: "start",
+                            loop: true
                         }}
-                        className="w-full max-w-[full] sm:max-w-xs  sm:max-w-full mx-auto"
+                        className="w-full"
                     >
-                        <CarouselContent className='-ml-2'>
-                            {
-                                products && products.map((item, index) => {
-                                    return (
-                                        <CarouselItem key={index}
-                                            className="pl-2 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-
-                                            <CardContent className="flex aspect-square items-center justify-center p-6">
-                                                <ProductCard product={item} />
-                                            </CardContent>
-                                        </CarouselItem>
-                                    )
-                                })
-                            }
+                        <CarouselContent className="-ml-6">
+                            {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
+                                <CarouselItem key={index} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                                    <ProductCard />
+                                </CarouselItem>
+                            ))}
                         </CarouselContent>
-                        <CarouselPrevious/>
-                        <CarouselNext />
+                        
+                        <div className="hidden md:flex items-center gap-2 absolute -top-24 right-0">
+                            <CarouselPrevious className="static translate-x-0 translate-y-0 h-12 w-12 border-zinc-200 dark:border-zinc-800 hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all" />
+                            <CarouselNext className="static translate-x-0 translate-y-0 h-12 w-12 border-zinc-200 dark:border-zinc-800 hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all" />
+                        </div>
                     </Carousel>
-                ) : (
-                    <p>Loading...</p>
-                )}
-                {/* {data && data.map((item, index) => (
-                    <motion.div key={index} variants={itemVariants}>
-                        <ProductCard product={item} />
-                    </motion.div>
-                ))} */}
-            </motion.div>
-
-            {/* View All Button */}
-            <motion.div
-                className="mt-16 flex justify-center"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, ease: 'easeOut', delay: 0.6 }}
-            >
-                <Link to={"/casual"}
-                    className="px-14 py-4 border border-gray-200 rounded-full text-base font-semibold hover:bg-gray-50 transition-colors"
-                    data-purpose="view-all-button"
-                >
-                    View All
-                </Link>
-            </motion.div>
-        </Container>
+                </motion.div>
+            </Container>
+        </section>
     )
 }
 

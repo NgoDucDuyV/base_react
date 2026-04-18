@@ -34,7 +34,7 @@ const AdminLayout = () => {
         width={250}
         className='relative'
       >
-        <div className="text-white text-3xl p-5 text-center font-bold">PH61445 FW2</div>
+        <div className="text-white text-3xl p-5 text-center font-bold">FW2</div>
         <SiderBarMenu />
 
         <div className="absolute bottom-0 left-0 right-0 p-4">

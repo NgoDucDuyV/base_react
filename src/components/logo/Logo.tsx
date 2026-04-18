@@ -6,15 +6,13 @@ type LogoProps = {
 };
 export default function Logo({ className }: LogoProps) {
   return (
-    <div className="flex items-center gap-2">
-      <Link
-        to="/"
-        className={cn(
-          "font-integral text-3xl md:text-4xl shrink-0",
-          className,
-        )}>
-        SHOP.CO
-      </Link>
-    </div>
+    <Link
+      to="/"
+      className={cn(
+        "font-black text-3xl md:text-5xl tracking-tighter hover:opacity-80 transition-opacity",
+        className,
+      )}>
+      SHOP<span className="text-indigo-600">.</span>CO
+    </Link>
   );
 }

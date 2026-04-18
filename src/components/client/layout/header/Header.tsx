@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import Container from '../../../Container'
 import Logo from '../../../logo/Logo'
-import { Menu } from 'lucide-react'
+import { Menu, Search, ShoppingBag, User, X } from 'lucide-react'
 import { cn } from '../../../../lib/utils'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSearchContext } from '@/contexts/client/search.contex'
@@ -10,206 +10,116 @@ import { useCart } from '@/contexts/client/cart.context'
 
 function Header() {
     const navigater = useNavigate()
-    const { keyword: keywordContext, setKeyword: setKeywordContext } = useSearchContext()
+    const { setKeyword: setKeywordContext } = useSearchContext()
     const { cartCount } = useCart()
     const [isheaderTop, setIsHeaderTop] = useState<boolean>(true)
     const [keyword, setKeyword] = useState<string>("")
-    const handleSearch = () => {
-        navigater(`/casual?keyword=${keyword}`)
-        setKeywordContext(keyword)        
-    }
-    
+    const [scrolled, setScrolled] = useState(false)
+
     useEffect(() => {
-        const time = setTimeout(() => {
-            handleSearch()
-        }, 500)
-        return () => clearTimeout(time)
-    },[keyword])
+        const handleScroll = () => setScrolled(window.scrollY > 20)
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
+
+    const handleSearch = () => {
+        if (keyword.trim()) {
+            navigater(`/casual?keyword=${keyword}`)
+            setKeywordContext(keyword)
+        }
+    }
 
     return (
         <>
-            {/* HEADER TOP */}
-            <motion.div
-                initial={{ y: -50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className={
-                    cn(
-                        "transition-all duration-300 ease-in-out",
-                        isheaderTop ? "block" : "hidden"
-                    )
-                }
-            >
-                <Container
-                    className='bg-[#000000] scrollbar-hide'
-                    classNameContent='py-1'>
-                    <div className="text-white text-center py-2.5 px-4 relative">
-                        <p className="text-sm font-light">
-                            Sign up and get 20% off to your first order.
-                            <a className="font-medium underline hover:text-gray-300 transition-colors" href="#">
-                                Sign Up Now
-                            </a>
-                        </p>
-                        <button onClick={() => setIsHeaderTop(pre => !pre)} className="absolute right-0 top-1/2 -translate-y-1/2 hover:opacity-70">
-                            <svg fill="none" height="20" stroke="currentColor" viewBox="0 0 24 24" width="20">
-                                <path d="M6 18L18 6M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </Container>
-            </motion.div>
-
-            {/* HEADER */}
-            <header className='sticky top-0 z-50'>
-                <Container className='bg-white shadow-sm py-3 scrollbar-hide'>
-
-                    <motion.nav
-                        initial={{ opacity: 0, y: -30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="flex items-center justify-between gap-x-8 h-[48px]"
+            {/* Announcement Bar */}
+            <AnimatePresence>
+                {isheaderTop && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="bg-zinc-900 text-white overflow-hidden"
                     >
-                        <motion.div
-                            initial="hidden"
-                            animate="show"
-                            variants={{
-                                hidden: {},
-                                show: { transition: { staggerChildren: 0.1 } }
-                            }}
-                            className="flex items-center gap-3"
-                        >
+                        <Container classNameContent="py-2.5 flex justify-center items-center relative">
+                            <p className="text-xs md:text-sm font-medium tracking-wide">
+                                Join our community and get <span className="text-indigo-400 font-bold">20% OFF</span> your first order. 
+                                <Link to="/register" className="ml-2 underline underline-offset-4 hover:text-indigo-300 transition-colors">Sign up now</Link>
+                            </p>
+                            <button onClick={() => setIsHeaderTop(false)} className="absolute right-4 p-1 hover:bg-white/10 rounded-full transition-colors">
+                                <X size={14} />
+                            </button>
+                        </Container>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
-                            {/* mobile search */}
-                            <motion.button variants={item} whileHover={{ scale: 1.1 }} whileTap={{ scale: 1 }} className="md:hidden p-1">
-                                <Menu className='w-7 h-7' />
-                            </motion.button>
-                            {/* LOGO */}
-                            <motion.div
-                                initial={{ opacity: 0, x: -30 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.3 }}
-                            >
+            {/* Main Header */}
+            <header className={cn(
+                "sticky top-0 z-[100] transition-all duration-300 w-full",
+                scrolled ? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-b border-zinc-200/50 dark:border-zinc-800/50 py-2 shadow-sm" : "bg-white dark:bg-zinc-950 py-5"
+            )}>
+                <Container>
+                    <nav className="flex items-center justify-between gap-8 h-12">
+                        {/* Left: Logo & Nav */}
+                        <div className="flex items-center gap-12">
+                            <div className="flex items-center gap-4">
+                                <button className="lg:hidden p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition-colors">
+                                    <Menu size={24} />
+                                </button>
                                 <Logo />
-                            </motion.div>
+                            </div>
 
-                        </motion.div>
+                            <ul className="hidden lg:flex items-center gap-8">
+                                {['Shop', 'On Sale', 'New Arrivals', 'Brands'].map((item) => (
+                                    <li key={item}>
+                                        <a href="#" className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                                            {item}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
 
-
-                        {/* MENU */}
-                        <motion.div
-                            initial="hidden"
-                            animate="show"
-                            variants={{
-                                hidden: {},
-                                show: { transition: { staggerChildren: 0.1 } }
-                            }}
-                            className="hidden lg:flex items-center space-x-6 whitespace-nowrap"
-                        >
-                            <motion.div variants={item}>
-                                <div className="relative group">
-                                    <button className="nav-link flex items-center gap-1">
-                                        Shop
-                                        <svg fill="currentColor" height={16} viewBox="0 0 16 16" width={16}>
-                                            <path d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </motion.div>
-
-                            <motion.a variants={item} className="nav-link" href="#">On Sale</motion.a>
-                            <motion.a variants={item} className="nav-link" href="#">New Arrivals</motion.a>
-                            <motion.a variants={item} className="nav-link" href="#">Brands</motion.a>
-                        </motion.div>
-
-                        {/* SEARCH */}
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.4 }}
-                            className="hidden md:block flex-grow max-w-xl"
-                        >
-                            <div className="relative">
-                                <span className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                            strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} />
-                                    </svg>
-                                </span>
-                                <form onSubmit={(e) => {
-                                    e.preventDefault()
-                                    handleSearch()
-
-                                }}>
+                        {/* Middle: Search */}
+                        <div className="hidden md:flex flex-grow max-w-xl group">
+                            <div className="relative w-full">
+                                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-indigo-600 transition-colors" size={18} />
+                                <form onSubmit={(e) => { e.preventDefault(); handleSearch(); }}>
                                     <input
-                                        className="block w-full pl-11 pr-4 py-3 bg-brand-gray border-none rounded-full text-sm focus:ring-black focus:ring-1"
-                                        placeholder="Search for products..."
                                         type="text"
-                                        onChange={(value) => {
-                                            setKeyword(value.target.value)
-                                        }}
+                                        placeholder="Search premium styles..."
+                                        className="w-full pl-12 pr-4 py-3 bg-zinc-100 dark:bg-zinc-800/50 border-2 border-transparent rounded-[1.25rem] text-sm font-medium focus:bg-white dark:focus:bg-zinc-900 focus:border-indigo-600/20 focus:ring-4 focus:ring-indigo-600/5 transition-all outline-none"
+                                        onChange={(e) => setKeyword(e.target.value)}
+                                        value={keyword}
                                     />
                                 </form>
                             </div>
-                        </motion.div>
+                        </div>
 
-                        {/* ACTIONS */}
-                        <motion.div
-                            initial="hidden"
-                            animate="show"
-                            variants={{
-                                hidden: {},
-                                show: { transition: { staggerChildren: 0.1 } }
-                            }}
-                            className="flex items-center gap-2 lg:gap-3 xl:gap-4"
-                        >
+                        {/* Right: Actions */}
+                        <div className="flex items-center gap-2 md:gap-4">
+                            <button className="md:hidden p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition-colors">
+                                <Search size={20} />
+                            </button>
 
-                            {/* mobile search */}
-                            <motion.button variants={item} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }} className="md:hidden p-1">
-                                <svg fill="none" height={24} stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                                    <circle cx={11} cy={11} r={8} />
-                                    <line x1={21} y1={21} x2="16.65" y2="16.65" />
-                                </svg>
-                            </motion.button>
-
-                            {/* cart */}
-                            <Link to={"/cart"}>
-                                <motion.button variants={item} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }} className="p-1 hover:opacity-70 relative">
-                                    <svg fill="none" height={24} stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                                        <circle cx={9} cy={21} r={1} />
-                                        <circle cx={20} cy={21} r={1} />
-                                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                                    </svg>
-                                    {cartCount > 0 && (
-                                        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
-                                            {cartCount}
-                                        </span>
-                                    )}
-                                </motion.button>
+                            <Link to="/cart" className="relative p-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition-colors group">
+                                <ShoppingBag size={22} className="group-hover:text-indigo-600 transition-colors" />
+                                {cartCount > 0 && (
+                                    <span className="absolute top-1 right-1 bg-indigo-600 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full ring-2 ring-white dark:ring-zinc-900">
+                                        {cartCount}
+                                    </span>
+                                )}
                             </Link>
 
-                            {/* user */}
-                            <Link to={"/register"}>
-                                <motion.button variants={item} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }} className="p-1 hover:opacity-70">
-                                    <svg fill="none" height={24} stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                                        <circle cx={12} cy={7} r={4} />
-                                    </svg>
-                                </motion.button>
+                            <Link to="/register" className="p-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition-colors group">
+                                <User size={22} className="group-hover:text-indigo-600 transition-colors" />
                             </Link>
-
-                        </motion.div>
-
-                    </motion.nav>
-
+                        </div>
+                    </nav>
                 </Container>
             </header>
         </>
     )
-}
-
-const item = {
-    hidden: { opacity: 0, y: -20 },
-    show: { opacity: 1, y: 0 }
 }
 
 export default Header

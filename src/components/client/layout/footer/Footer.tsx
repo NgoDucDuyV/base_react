@@ -1,179 +1,99 @@
 import { motion } from "framer-motion"
 import Container from '../../../Container'
 import Logo from '../../../logo/Logo'
-import "./footer.css"
-import { Mail } from "lucide-react"
+import { Mail, Github, Twitter, Instagram, Linkedin } from "lucide-react"
+
 function Footer() {
     return (
-        <Container className='mt-auto'
-            classNameContent='bg-white'>
-            <footer className="w-full">
-
+        <footer className="w-full bg-zinc-50 dark:bg-zinc-950 pt-32 pb-12 overflow-hidden border-t border-zinc-200/50 dark:border-zinc-800/50">
+            <Container>
                 {/* NEWSLETTER */}
                 <motion.div
-                    initial={{ opacity: 0, y: 80 }}
+                    initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
-                    className="max-w-7xl mx-auto sm:px-6 lg:px-0 newsletter-wrapper"
+                    className="relative -mt-48 mb-24"
                 >
-                    <div className="bg-black rounded-[20px] p-8 md:p-12 flex flex-col lg:flex-row justify-between items-center gap-8">
-
-                        <motion.div
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                            viewport={{ once: true }}
-                            className="lg:w-7/12"
-                        >
-                            <h2 className="text-white text-3xl md:text-5xl font-black leading-tight uppercase">
-                                STAY UPTO DATE ABOUT<br />OUR LATEST OFFERS
+                    <div className="bg-zinc-900 dark:bg-zinc-800 rounded-[2.5rem] p-8 md:p-16 flex flex-col lg:flex-row justify-between items-center gap-10 shadow-2xl relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl -mr-32 -mt-32 group-hover:bg-indigo-600/20 transition-colors duration-700" />
+                        
+                        <div className="lg:w-1/2 relative z-10">
+                            <h2 className="text-white text-4xl md:text-6xl font-black leading-[0.9] tracking-tighter uppercase mb-6">
+                                STAY UPDATED ON <br /><span className="text-indigo-400">OUR LATEST OFFERS</span>
                             </h2>
-                        </motion.div>
+                            <p className="text-zinc-400 text-lg max-w-md">Subscribe to our newsletter and never miss our exclusive drops.</p>
+                        </div>
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 }}
-                            viewport={{ once: true }}
-                            className="w-full lg:w-4/12 flex flex-col gap-4"
-                        >
-                            <div className="relative">
-                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <Mail className="text-white/60" />
-                                </div>
+                        <div className="w-full lg:w-1/3 flex flex-col gap-4 relative z-10">
+                            <div className="relative group">
+                                <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-white transition-colors" size={20} />
                                 <input
-                                    className="block w-full rounded-full border-0 py-3 pl-12 text-white ring-1 ring-inset ring-gray-300"
+                                    className="w-full bg-zinc-800 dark:bg-zinc-950/50 border border-zinc-700 rounded-full py-4 pl-14 pr-6 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-600 transition-all font-medium"
                                     placeholder="Enter your email address"
                                     type="email"
                                 />
                             </div>
-
-                            <button className="w-full bg-white text-black font-semibold py-3 px-6 rounded-full hover:bg-gray-100 transition-colors">
+                            <button className="w-full bg-white text-black font-bold py-4 px-8 rounded-full hover:bg-zinc-200 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]">
                                 Subscribe to Newsletter
                             </button>
-                        </motion.div>
-
+                        </div>
                     </div>
                 </motion.div>
 
                 {/* MAIN FOOTER */}
-                <div className="bg-shop-gray footer-main-content">
-                    <div className="w-full mx-auto px-2 sm:px-6 lg:px-0 pb-12">
-
-                        {/* GRID */}
-                        <motion.div
-                            initial="hidden"
-                            whileInView="show"
-                            viewport={{ once: true }}
-                            variants={{
-                                hidden: {},
-                                show: {
-                                    transition: { staggerChildren: 0.15 }
-                                }
-                            }}
-                            className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 border-b border-black/10 pb-12"
-                        >
-
-                            {/* Column 1 */}
-                            <motion.div variants={item}>
-                                <Logo />
-                                <p className="text-black/60 text-sm leading-relaxed mb-8 max-w-[250px]">
-                                    We have clothes that suits your style and which you’re proud to wear. From women to men.
-                                </p>
-                                {/* social giữ nguyên */}
-                            </motion.div>
-
-                            {/* Các column giữ nguyên */}
-                            <motion.div variants={item}>
-                                <h4 className="footer-heading">COMPANY</h4>
-                                <ul className="space-y-4">
-                                    <li><a className="footer-link" href="#">About</a></li>
-                                    <li><a className="footer-link" href="#">Features</a></li>
-                                    <li><a className="footer-link" href="#">Works</a></li>
-                                    <li><a className="footer-link" href="#">Career</a></li>
-                                </ul>
-                            </motion.div>
-
-                            <motion.div variants={item}>
-                                <h4 className="footer-heading">HELP</h4>
-                                <ul className="space-y-4">
-                                    <li><a className="footer-link" href="#">Customer Support</a></li>
-                                    <li><a className="footer-link" href="#">Delivery Details</a></li>
-                                    <li><a className="footer-link" href="#">Terms & Conditions</a></li>
-                                    <li><a className="footer-link" href="#">Privacy Policy</a></li>
-                                </ul>
-                            </motion.div>
-
-                            <motion.div variants={item}>
-                                <h4 className="footer-heading">FAQ</h4>
-                                <ul className="space-y-4">
-                                    <li><a className="footer-link" href="#">Account</a></li>
-                                    <li><a className="footer-link" href="#">Manage Deliveries</a></li>
-                                    <li><a className="footer-link" href="#">Orders</a></li>
-                                    <li><a className="footer-link" href="#">Payments</a></li>
-                                </ul>
-                            </motion.div>
-
-                            <motion.div variants={item}>
-                                <h4 className="footer-heading">RESOURCES</h4>
-                                <ul className="space-y-4">
-                                    <li><a className="footer-link" href="#">Free eBooks</a></li>
-                                    <li><a className="footer-link" href="#">Development Tutorial</a></li>
-                                    <li><a className="footer-link" href="#">How to - Blog</a></li>
-                                    <li><a className="footer-link" href="#">Youtube Playlist</a></li>
-                                </ul>
-                            </motion.div>
-
-                        </motion.div>
-
-                        {/* BOTTOM */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            transition={{ delay: 0.2 }}
-                            viewport={{ once: true }}
-                            className="mt-8 flex flex-col md:flex-row justify-between items-center gap-6"
-                        >
-                            <p className="text-black/60 text-sm">
-                                Shop.co © 2000-2023, All Rights Reserved
-                            </p>
-
-                            <div className="flex items-center gap-2">
-                                {/* Visa */}
-                                <div className="bg-white px-2 py-1 rounded border border-black/5 h-[32px] w-[46px] flex items-center justify-center">
-                                    <img alt="Visa" className="h-full object-contain" src="/images/Badge.png" />
-                                </div>
-                                {/* Mastercard */}
-                                <div className="bg-white px-2 py-1 rounded border border-black/5 h-[32px] w-[46px] flex items-center justify-center">
-                                    <img alt="Mastercard" className="h-full object-contain" src="/images/Badge(1).png" />
-                                </div>
-                                {/* Paypal */}
-                                <div className="bg-white px-2 py-1 rounded border border-black/5 h-[32px] w-[46px] flex items-center justify-center">
-                                    <img alt="PayPal" className="h-full object-contain" src="/images/Badge(2).png" />
-                                </div>
-                                {/* Apple Pay */}
-                                <div className="bg-white px-2 py-1 rounded border border-black/5 h-[32px] w-[46px] flex items-center justify-center">
-                                    <img alt="Apple Pay" className="h-full object-contain" src="/images/Badge(3).png" />
-                                </div>
-                                {/* Google Pay */}
-                                <div className="bg-white px-2 py-1 rounded border border-black/5 h-[32px] w-[46px] flex items-center justify-center">
-                                    <img alt="Google Pay" className="h-full object-contain" src="/images/Badge(4).png" />
-                                </div>
-                            </div>
-                        </motion.div>
-
+                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 pb-16 border-b border-zinc-200 dark:border-zinc-800">
+                    <div className="col-span-2 lg:col-span-1">
+                        <Logo className="mb-8 block" />
+                        <p className="text-zinc-500 text-sm leading-relaxed mb-8 max-w-[280px]">
+                            Redefining style through premium craftsmanship and timeless design for the modern individual.
+                        </p>
+                        <div className="flex items-center gap-4">
+                            {[Twitter, Instagram, Github, Linkedin].map((Icon, i) => (
+                                <a key={i} href="#" className="w-10 h-10 rounded-full border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                                    <Icon size={18} />
+                                </a>
+                            ))}
+                        </div>
                     </div>
+
+                    {[
+                        { title: 'COMPANY', links: ['About', 'Features', 'Works', 'Career'] },
+                        { title: 'HELP', links: ['Customer Support', 'Delivery Details', 'Terms & Conditions', 'Privacy Policy'] },
+                        { title: 'FAQ', links: ['Account', 'Manage Deliveries', 'Orders', 'Payments'] },
+                        { title: 'RESOURCES', links: ['Free eBooks', 'Development Tutorial', 'How to - Blog', 'Youtube Playlist'] }
+                    ].map((col) => (
+                        <div key={col.title}>
+                            <h4 className="text-sm font-bold tracking-widest text-zinc-900 dark:text-zinc-100 mb-8 uppercase">{col.title}</h4>
+                            <ul className="space-y-4">
+                                {col.links.map((link) => (
+                                    <li key={link}>
+                                        <a href="#" className="text-zinc-500 hover:text-indigo-600 dark:hover:text-amber-400 text-sm transition-colors font-medium">
+                                            {link}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
                 </div>
 
-            </footer>
-        </Container>
+                {/* BOTTOM */}
+                <div className="pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
+                    <p className="text-zinc-500 text-sm font-medium">
+                        Shop.co © 2000-2024. Crafted with Passion.
+                    </p>
+                    <div className="flex items-center gap-4 opacity-100 grayscale hover:grayscale-0 transition-all duration-500">
+                        {['Visa', 'Mastercard', 'Paypal', 'Apple Pay', 'Google Pay'].map((pay) => (
+                            <div key={pay} className="h-8 w-12 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-md flex items-center justify-center p-1 shadow-sm">
+                                <div className="text-[10px] font-black text-zinc-900 dark:text-white">{pay}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </Container>
+        </footer>
     )
-}
-
-const item = {
-    hidden: { opacity: 0, y: 40 },
-    show: { opacity: 1, y: 0 }
 }
 
 export default Footer

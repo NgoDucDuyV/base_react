@@ -25,30 +25,10 @@ function Register() {
     const [form] = Form.useForm<TRegisterForm>();
 
     const onFinish = (values: TRegisterForm) => {
-        const data: TRegister = {
-            username: values.username,
-            email: values.email,
-            password: values.password,
-        }
-        Register.mutateAsync(data)
+        console.log(values);
     };
 
-
-    const Register = useMutation({
-        mutationFn: async (data: TRegister) => {
-            const res = axios.post(`http://localhost:3000/register`, data)
-            return res
-        },
-
-        onSuccess: (res: AxiosResponse) => {
-            message.success("Tạo tải khoản thành công !")
-            navigate("/login")
-        },
-
-        onError: (err: AxiosError) => {
-            message.error(`${err.response?.data}`)
-        }
-    })
+    const Register = useMutation({})
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">

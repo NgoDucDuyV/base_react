@@ -1,40 +1,39 @@
 import React from 'react';
+import { Star, Check } from 'lucide-react';
 
-const TestimonialCard = () => {
+interface TestimonialCardProps {
+  name: string;
+  review: string;
+  rating: number;
+}
+
+const TestimonialCard = ({ name, review, rating }: TestimonialCardProps) => {
   return (
-    <div className="max-w-[400px] bg-white border border-black/5 rounded-[20px] p-7 shadow-sm">
-      {/* Phần xếp hạng sao */}
-      <div className="flex gap-1 mb-3">
+    <div className="bg-white dark:bg-zinc-900 border border-zinc-200/50 dark:border-zinc-800/50 rounded-[2rem] p-8 shadow-sm hover:shadow-xl transition-all duration-500 group">
+      {/* Rating */}
+      <div className="flex gap-1 mb-6">
         {[...Array(5)].map((_, i) => (
-          <svg 
+          <Star 
             key={i} 
-            className="w-5 h-5 fill-[#FFC107]" 
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-          </svg>
+            size={18}
+            className={i < rating ? "fill-amber-400 text-amber-400" : "text-zinc-200 dark:text-zinc-700"} 
+          />
         ))}
       </div>
 
-      {/* Tên và Tick xác minh */}
-      <div className="flex items-center gap-1.5 mb-3">
-        <span className="text-xl font-bold text-black">Alex K.</span>
-        <div className="bg-[#01AB31] rounded-full p-0.5">
-          <svg 
-            className="w-3 h-3 text-white" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="4" 
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-          </svg>
+      {/* User Info */}
+      <div className="flex items-center gap-2 mb-4">
+        <span className="text-xl font-black text-zinc-900 dark:text-white tracking-tight group-hover:text-indigo-600 transition-colors">
+          {name}
+        </span>
+        <div className="bg-emerald-500 rounded-full p-0.5 shadow-sm">
+          <Check size={10} className="text-white" strokeWidth={4} />
         </div>
       </div>
 
-      {/* Nội dung đánh giá */}
-      <p className="text-black/60 text-[15px] leading-relaxed">
-        "Finding clothes that align with my personal style used to be a challenge until I discovered Shop.co. The range of options they offer is truly remarkable, catering to a variety of tastes and occasions."
+      {/* Content */}
+      <p className="text-zinc-500 dark:text-zinc-400 text-base leading-relaxed font-medium line-clamp-4">
+        "{review}"
       </p>
     </div>
   );

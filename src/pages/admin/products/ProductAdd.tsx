@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form, Input, InputNumber, Select, Space, Spin } from 'antd';
 import type { TProductFrom } from '@/types/product.type';
-import { useCaregorys } from '@/hook/caregory.hook';
-import { useProductCreate } from '@/hook/product.hook';
 import { useNavigate } from 'react-router-dom';
 
 const layout = {
@@ -17,29 +15,17 @@ const tailLayout = {
 function ProductAdd() {
     const [form] = Form.useForm<TProductFrom>();
     const navigate = useNavigate()
-    const create = useProductCreate()
+    // const create = useProductCreate()
 
     const onFinish = (values: TProductFrom) => {
         console.log(values);
-        const data = {
-            ...values,
-            gallery: [values.image_url],
-            rating: 0,
-            currency: "$",
-            is_featured: false
-        }
-        console.log(data);
-
-        create.mutateAsync(data)
-
-        navigate("/admin/products")
     };
 
     const onReset = () => {
         form.resetFields();
     };
 
-    const { data: caregory, isLoading } = useCaregorys()
+    const caregory = []
 
     const [caregorieOptions, setCaregorieOptions] = useState<{
         label: string,
@@ -47,20 +33,36 @@ function ProductAdd() {
     }[]>([])
 
 
+    // useEffect(() => {
+    //     setCaregorieOptions(caregory?.map((item) => {
+    //         return {
+    //             label: item.name,
+    //             value: item.id as string
+    //         }
+    //     }) as {
+    //         label: string,
+    //         value: string
+    //     }[]
+    //     )
+    // }, [])
+
     useEffect(() => {
-        if (!isLoading) {
-            setCaregorieOptions(caregory?.map((item) => {
-                return {
-                    label: item.name,
-                    value: item.id as string
-                }
-            }) as {
-                label: string,
-                value: string
-            }[]
-            )
-        }
-    }, [isLoading])
+        setCaregorieOptions([
+            {
+                label: "Men",
+                value: "1"
+            },
+            {
+                label: "Women",
+                value: "2"
+            },
+            {
+                label: "Accessories",
+                value: "3"
+            }
+        ])
+    }, [])
+
     return (
         <>
             <h1 className='text-2xl font-bold mb-5'>Product Add</h1>
@@ -85,18 +87,6 @@ function ProductAdd() {
                     rules={[
                         { required: true, message: "Mô tả không được để trống" },
                         { min: 10, message: "Mô tả phải >= 10 ký tự" }
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
-
-                <Form.Item name="slug" label="Slug"
-                    rules={[
-                        { required: true, message: "Slug không được để trống" },
-                        {
-                            pattern: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
-                            message: "Slug chỉ chứa chữ thường, số và dấu -"
-                        }
                     ]}
                 >
                     <Input />
@@ -136,51 +126,6 @@ function ProductAdd() {
                     <InputNumber />
                 </Form.Item>
 
-                <Form.Item name="discount_percentage" label="discount_percentage"
-                    rules={[
-                        { required: true, message: "Discount là bắt buộc" },
-                        {
-                            validator: (_, value) =>
-                                value >= 0 && value <= 100
-                                    ? Promise.resolve()
-                                    : Promise.reject("Discount từ 0 - 100")
-                        }
-                    ]}
-                >
-                    <InputNumber />
-                </Form.Item>
-
-                <Form.Item name="stock" label="Stock"
-                    rules={[
-                        { required: true, message: "Stock là bắt buộc" },
-                        {
-                            validator: (_, value) =>
-                                value >= 0
-                                    ? Promise.resolve()
-                                    : Promise.reject("Stock phải >= 0")
-                        }
-                    ]}
-                >
-                    <InputNumber />
-                </Form.Item>
-
-                <Form.Item name="category_id" label="Category" rules={[{ required: true, message: "Danh mục là bắt buộc" }]}>
-                    {
-                        isLoading ? (
-                            <>
-                            </>
-                        ) :
-                            (
-                                <Select
-                                    allowClear
-                                    placeholder="Select a option and change input text above"
-                                    // onChange={onGenderChange}
-                                    options={caregorieOptions}
-                                />
-                            )
-                    }
-
-                </Form.Item>
                 <Form.Item
                     noStyle
                     shouldUpdate={(prevValues, currentValues) => prevValues.gender !== currentValues.gender}
@@ -196,7 +141,7 @@ function ProductAdd() {
                 <Form.Item {...tailLayout}>
                     <Space>
                         <Button type="primary" htmlType="submit">
-                            {
+                            {/* {
                                 create.isPending ? (
                                     <>
                                         <Spin />
@@ -207,7 +152,7 @@ function ProductAdd() {
                                         Submit
                                     </>
                                 )
-                            }
+                            } */}
                         </Button>
                         <Button htmlType="button" onClick={onReset}>
                             Reset
